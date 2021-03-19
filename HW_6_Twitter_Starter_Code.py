@@ -203,7 +203,7 @@ def find_most_common_cooccurring_hashtag(tweet_data, hashtag_to_ignore):
     
     most_common_cooccurring_hashtag = max(hashtag_dict,key = hashtag_dict.get)
 
-    return hashtag_dict,"#"+most_common_cooccurring_hashtag
+    return "#"+most_common_cooccurring_hashtag
 
 
     ''' Hint: In case you're confused about the hashtag_to_ignore 
@@ -229,8 +229,7 @@ if __name__ == "__main__":
     count = 100
 
     tweet_data = make_request_with_cache(baseurl, hashtag, count)
-    dict1,most_common_cooccurring_hashtag = find_most_common_cooccurring_hashtag(tweet_data, hashtag)
-    print(dict1)
+    most_common_cooccurring_hashtag = find_most_common_cooccurring_hashtag(tweet_data, hashtag)
     print("The most commonly cooccurring hashtag with {} is {}.".format(hashtag, most_common_cooccurring_hashtag))
 
 
