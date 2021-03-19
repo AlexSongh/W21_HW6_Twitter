@@ -200,14 +200,8 @@ def find_most_common_cooccurring_hashtag(tweet_data, hashtag_to_ignore):
                     else:
                         hashtag_dict[ht] = hashtag_dict[ht]+1
 
-    maxnum = 0
-    for num in hashtag_dict.values():
-        if num > maxnum:
-            maxnum = num
-
-    for key,value in hashtag_dict.items():
-        if value == maxnum:
-            most_common_cooccurring_hashtag = key
+    
+    most_common_cooccurring_hashtag = max(hashtag_dict,key = hashtag_dict.get)
 
     return "#"+most_common_cooccurring_hashtag
 
@@ -219,7 +213,6 @@ def find_most_common_cooccurring_hashtag(tweet_data, hashtag_to_ignore):
     we're essentially looking for the second most commonly occurring 
     hashtags).'''
 
-    
 
 if __name__ == "__main__":
     if not client_key or not client_secret:
@@ -238,3 +231,5 @@ if __name__ == "__main__":
     tweet_data = make_request_with_cache(baseurl, hashtag, count)
     most_common_cooccurring_hashtag = find_most_common_cooccurring_hashtag(tweet_data, hashtag)
     print("The most commonly cooccurring hashtag with {} is {}.".format(hashtag, most_common_cooccurring_hashtag))
+
+
