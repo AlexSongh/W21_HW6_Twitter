@@ -348,7 +348,7 @@ def find_ten_most_common_words(tweet_data, hashtag, word_list):
                     if word not in word_list:
                         if not word.isnumeric():
                             if 'https:' not in word:
-                                if len(word)>1 and word!="&amp":
+                                if len(word)>1:
                                     word.encode('ascii','ignore')
                                     word = word.replace(',','').replace('.','').replace(';','')
                                     if word not in accumulator.keys():
