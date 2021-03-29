@@ -156,10 +156,10 @@ def make_request_with_cache(baseurl, hashtag, count):
     params = {'q':hashtag,'count':count}
     request_key = construct_unique_key(baseurl, params)
     if request_key in CACHE_DICT.keys():
-        print("fetching cached data", request_key)
+        print("fetching cached data")
         return CACHE_DICT[request_key]
     else:
-        print("making new request", request_key)
+        print("making new request")
         CACHE_DICT[request_key] = make_request(baseurl, params)
         save_cache(CACHE_DICT)
         return CACHE_DICT[request_key]
@@ -203,7 +203,7 @@ def find_most_common_cooccurring_hashtag(tweet_data, hashtag_to_ignore):
     
     most_common_cooccurring_hashtag = max(hashtag_dict,key = hashtag_dict.get)
 
-    return "#"+most_common_cooccurring_hashtag
+    return most_common_cooccurring_hashtag
 
 
     ''' Hint: In case you're confused about the hashtag_to_ignore 
@@ -230,6 +230,6 @@ if __name__ == "__main__":
 
     tweet_data = make_request_with_cache(baseurl, hashtag, count)
     most_common_cooccurring_hashtag = find_most_common_cooccurring_hashtag(tweet_data, hashtag)
-    print("The most commonly cooccurring hashtag with {} is {}.".format(hashtag, most_common_cooccurring_hashtag))
+    print("The most commonly cooccurring hashtag with {} is #{}.".format(hashtag, most_common_cooccurring_hashtag))
 
 
