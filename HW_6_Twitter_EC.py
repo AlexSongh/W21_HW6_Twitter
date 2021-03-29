@@ -155,13 +155,14 @@ def make_request_with_cache(baseurl, hashtag, count):
         the results of the query as a dictionary loaded from cache
         JSON
     '''
+    CACHE_DICT = open_cache()
     params = {'q':hashtag,'count':count}
     request_key = construct_unique_key(baseurl, params)
     if request_key in CACHE_DICT.keys():
-        print("fetching cached data", request_key)
+        print("fetching cached data")
         return CACHE_DICT[request_key]
     else:
-        print("making new request", request_key)
+        print("making new request")
         CACHE_DICT[request_key] = make_request(baseurl, params)
         save_cache(CACHE_DICT)
         return CACHE_DICT[request_key]
@@ -205,7 +206,7 @@ def find_most_common_cooccurring_hashtag(tweet_data, hashtag_to_ignore):
     
     most_common_cooccurring_hashtag = max(hashtag_dict,key = hashtag_dict.get)
 
-    return "#"+most_common_cooccurring_hashtag
+    return most_common_cooccurring_hashtag
     # return (hashtag_dict)
 
     ''' Hint: In case you're confused about the hashtag_to_ignore 
@@ -281,7 +282,7 @@ def find_most_common_3_cooccurring_hashtag(tweet_data, hashtag_to_ignore):
         found_dict[third_key] = thirdnum
         del hashtag_dict[third_key]
 
-        return ("#"+first_key, "#"+second_key, "#"+third_key)
+        return (first_key, second_key, third_key)
 
     elif len(hashtag_dict.keys()) == 2:
         firstnum = max(hashtag_dict.values())
@@ -299,12 +300,12 @@ def find_most_common_3_cooccurring_hashtag(tweet_data, hashtag_to_ignore):
                 second_key = key
         found_dict[second_key] = firstnum
         del hashtag_dict[second_key]
-        return ("#"+first_key, "#"+second_key)
+        return (first_key, second_key)
 
     elif len(hashtag_dict.keys()) == 1:
         firstnum = max(hashtag_dict.values())
         first_key = max(hashtag_dict,key = hashtag_dict.get)
-        return ("#"+first_key)
+        return (first_key)
     elif len(hashtag_dict.keys()) == 0:
         return None
 
@@ -390,11 +391,11 @@ if __name__ == "__main__":
 
             if hashtag_tuple != None:
                 if len(hashtag_tuple)>=3:
-                    print("The most top three commonly co-occurring hashtag with {} is {}, {} and {}.".format(hashtag, hashtag_tuple[0], hashtag_tuple[1], hashtag_tuple[2]))
+                    print("The most top three commonly co-occurring hashtag with {} is #{}, #{} and #{}.".format(hashtag, hashtag_tuple[0], hashtag_tuple[1], hashtag_tuple[2]))
                 elif len(hashtag_tuple) == 2:
-                    print("The most top two commonly co-occurring hashtag with {} is {} and {}.".format(hashtag, hashtag_tuple[0], hashtag_tuple[1]))
+                    print("The most top two commonly co-occurring hashtag with {} is #{} and #{}.".format(hashtag, hashtag_tuple[0], hashtag_tuple[1]))
                 elif len(hashtag_tuple) == 1:
-                    print("The most top commonly co-occurring hashtag with {} is {}.".format(hashtag, hashtag_tuple[0]))
+                    print("The most top commonly co-occurring hashtag with {} is #{}.".format(hashtag, hashtag_tuple[0]))
             else:
                 print("There is no other co-occuring hashtags that match your search.")
     
