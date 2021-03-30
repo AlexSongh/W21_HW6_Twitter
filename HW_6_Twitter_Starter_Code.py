@@ -153,6 +153,7 @@ def make_request_with_cache(baseurl, hashtag, count):
         the results of the query as a dictionary loaded from cache
         JSON
     '''
+    CACHE_DICT = open_cache()
     params = {'q':hashtag,'count':count}
     request_key = construct_unique_key(baseurl, params)
     if request_key in CACHE_DICT.keys():
@@ -200,7 +201,7 @@ def find_most_common_cooccurring_hashtag(tweet_data, hashtag_to_ignore):
                     else:
                         hashtag_dict[ht] = hashtag_dict[ht]+1
 
-    
+
     most_common_cooccurring_hashtag = max(hashtag_dict,key = hashtag_dict.get)
 
     return most_common_cooccurring_hashtag
